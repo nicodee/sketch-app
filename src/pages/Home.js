@@ -36,6 +36,10 @@ function Home({ history }) {
         You can try{" "}
         <a href="/documents/Y8wDM">
           <b>Y8wDM</b>
+        </a>{" "}
+        or{" "}
+        <a href="/documents/4W43q">
+          <b>4W43q</b>
         </a>
       </p>
     </Container>

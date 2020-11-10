@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { DOCUMENT } from "../api/queries";
 import Loader from "../components/Loader";
 import { ReactComponent as SketchLogo } from "../assets/sketch-logo.svg";
+import { ReactComponent as Separator } from "../assets/separator.svg";
 
 const RootContainer = styled.div`
   display: flex;
@@ -34,12 +35,13 @@ const DocumentBodyWrapper = styled.div`
 
 const LogoWrapper = styled.div`
   margin: 16px;
-  margin-right: 40px;
   cursor: pointer;
 `;
 
 const DocumentTitle = styled.span`
   font-size: 16px;
+  margin-left: 40px;
+  font-weight: bold;
 `;
 
 const ThumbnailWrapper = styled.figure`
@@ -66,12 +68,17 @@ const ThumbnailCaption = styled.figcaption`
   bottom: 0px;
 `;
 
-function Header({ children }) {
+function Header({ children, history }) {
   return (
     <DocumentHeaderWrapper>
-      <LogoWrapper>
+      <LogoWrapper
+        onClick={() => {
+          history.push("/");
+        }}
+      >
         <SketchLogo />
       </LogoWrapper>
+      <Separator />
       <DocumentTitle>{children}</DocumentTitle>
     </DocumentHeaderWrapper>
   );
@@ -121,7 +128,9 @@ function Document({
 
   return (
     <RootContainer>
-      <Header>{data && data.share.version.document.name}</Header>
+      <Header history={history}>
+        {data && data.share.version.document.name}
+      </Header>
       <DocumentBodyWrapper>
         {data &&
           data.share.version.document.artboards.entries.map((entry) => {
